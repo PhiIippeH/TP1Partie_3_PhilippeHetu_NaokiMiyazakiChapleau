@@ -1,0 +1,4 @@
+Naoki: Commandes incorrectes
+Philippe: Facture en sortie
+Philippe: Facture de 0$
+Naoki: Taxes
