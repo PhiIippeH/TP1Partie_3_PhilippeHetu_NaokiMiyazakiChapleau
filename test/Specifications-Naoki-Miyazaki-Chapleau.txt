@@ -1,0 +1,6 @@
+Les commande peuvent contenir des erreurs. Gérer les cas suivants:
+o Le nom du client ou le plat n’existe pas.
+o Le format d’un client, d’un plat ou d’une commande n’est pas respecté.
+o Des chiffres sont erronés (prix du plat, quantité de plats commandés).
+
+Ajouter les taxes à la fin de la facture: 5% TPS, 10% TVQ.
