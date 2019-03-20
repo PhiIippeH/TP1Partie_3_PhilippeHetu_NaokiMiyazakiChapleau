@@ -1,0 +1,8 @@
+Fonctionnalité: En sortie, on souhaite avoir une facture affichée à l’écran (terminal) et éditée dans le
+fichier (Facture-du-date-heure.txt).
+Question : Est-ce qu'on veut une boîte de dialogue pour le test ou simplement le terminal.
+
+On vous pouvoir afficher sur un terminal tous en écrivant dans un fichier texte la facture d'un client
+
+Fonctionnalité: Si un client a une facture de 0$, sa facture n’est pas affichée dans le fichier de sortie.
+On affiche et on écrit rien lorsque le client paie 0$ et moins.
