@@ -4,11 +4,10 @@ import java.util.*;
 
 /**
  * Permet de créer une facture basé sur un fichier texte préformatté.
- * @author Nuvm
+ * @author Naoki Miyazaki-Chapleau et Philippe Hétu
  *
  */
 public class Factures {
-	// Philippe et Naoki
 	private List<String> clients = new ArrayList<String>();
 	private List<String> plats = new ArrayList<String>();
 	private List<String> commandes = new ArrayList<String>();
