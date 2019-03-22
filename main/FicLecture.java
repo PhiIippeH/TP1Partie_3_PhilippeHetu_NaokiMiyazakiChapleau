@@ -9,11 +9,23 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * Classe qui permet d'ouvrir un fichier texte avec une fenêtre Swing.
+ * @author Nuvm
+ *
+ */
 public class FicLecture {
 
+	/**
+	 * Le constructeur vide. Il permet d'accéder aux méthodes offertes par cette classe.
+	 */
 	public FicLecture() {
 		
 	}
+	/**
+	 * Permet à l'utilisateur de choisir un fichier texte de amnière visuelle.
+	 * @return Une liste contenant un string correspondant à chaque ligne du fichier.
+	 */
 	public List<String> fileChoose(){
 		// TODO Auto-generated method stub
 		List<String> lignes = new ArrayList<String>();
@@ -28,8 +40,10 @@ public class FicLecture {
 				lignes = Files.readAllLines(file,Charset.forName("ISO-8859-1"));
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.exit(0);
 			}
+		} else {
+			System.out.println("Veuillez choisir un fichier.");
+			return null;
 		}
 		return lignes;
 	}
