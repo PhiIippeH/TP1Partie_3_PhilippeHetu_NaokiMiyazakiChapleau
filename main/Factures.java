@@ -12,8 +12,8 @@ public class Factures {
 	public List<String> clients = new ArrayList<String>();
 	public List<String> plats = new ArrayList<String>();
 	public List<String> commandes = new ArrayList<String>();
-	public List<String> lignes;
-	public String erreur = "";
+	public List<String> lignes = new ArrayList<String>();
+	public String erreur = null;
 
 	public Factures() {
 		
@@ -22,7 +22,10 @@ public class Factures {
 	public Factures(boolean a) {
 		// Dialogue d'ouverture de fichier
 		FicLecture fic = new FicLecture();
-		setLignes(fic.fileChoose());
+		lignes = fic.fileChoose();
+		lireFic();
+		if(erreur!=null)verifierErreurs();
+		if(erreur!=null)printFacture();
 	}
 
 	public void setLignes(List<String> testLignes) {
