@@ -35,8 +35,8 @@ public class Factures {
 	 * @see FicLecture
 	 */
 	
-	public void lireFic() {
-		erreur = "";
+	public String lireFic() {
+		erreur = null;
 		
 
 		// Fin du while
@@ -62,7 +62,7 @@ public class Factures {
 
 					// Si le type est -1, la donnée client n'a jamais été présente
 					fin = true;
-					erreur = "Format non respecté: La donnée client est indisponible.";
+					return "Format non respecté: La donnée client est indisponible.";
 
 				} else if (a.indexOf("Fin") == -1) {
 
@@ -79,7 +79,7 @@ public class Factures {
 
 					// Si le type est au-dessus de 2, il y a une anomalie
 					else
-						erreur = "Format non respecté: 'Fin' n'est pas la dernière ligne.";
+						return "Format non respecté: 'Fin' n'est pas la dernière ligne.";
 
 				}
 
@@ -88,8 +88,9 @@ public class Factures {
 			}
 
 		} else {
-			erreur = "Veuillez choisir un fichier.";
+			return "Erreur de lecture: lignes est null.";
 		}
+		return erreur;
 
 	}
 
@@ -97,7 +98,8 @@ public class Factures {
 	 * Vérifie les potentielles erreurs dans la commande.
 	 */
 
-	public void verifierErreurs() {
+	public String verifierErreurs() {
+		
 		// Vérification des erreurs dans la liste de commandes
 		for (int i = 0; i < commandes.size(); i++) {
 			// Commandes est formatté comme suit: <Client> <Plat>
@@ -124,6 +126,7 @@ public class Factures {
 				erreur = "Ce client n'est pas dans la liste.";
 			}
 		}
+		return erreur;
 	}
 
 	/**
@@ -135,6 +138,7 @@ public class Factures {
 		// Si il y a une erreur, afficher l'erreur
 		// TODO Deprecated. Il faut implémenter un moyen de retourner les erreurs durant
 		// le processus plutôt qu'à la dernière méthode du programme.
+		
 		if (erreur != "") {
 			System.out.println("ERREUR: " + erreur);
 		} else {
