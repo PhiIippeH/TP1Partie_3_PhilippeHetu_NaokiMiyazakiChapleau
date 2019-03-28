@@ -9,11 +9,11 @@ import java.util.*;
  *
  */
 public class Factures {
-	private List<String> clients = new ArrayList<String>();
-	private List<String> plats = new ArrayList<String>();
-	private List<String> commandes = new ArrayList<String>();
-	private List<String> lignes;
-	private String erreur = "";
+	public List<String> clients = new ArrayList<String>();
+	public List<String> plats = new ArrayList<String>();
+	public List<String> commandes = new ArrayList<String>();
+	public List<String> lignes;
+	public String erreur = "";
 
 	public Factures() {
 		
@@ -27,8 +27,9 @@ public class Factures {
 
 	public void setLignes(List<String> testLignes) {
 		lignes = new ArrayList<String>();
+		lignes = testLignes;
 	}
-
+	
 	/**
 	 * Lit et amasse les données des commandes.
 	 * 
