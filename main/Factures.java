@@ -208,7 +208,7 @@ public class Factures {
 			// signifie un problème dans la vérification des erreurs ou dans la
 			// recherche
 			// des commandes dans printFacture()
-			
+
 			System.out.println( nom + " " + total + "$" );
 		}
 
@@ -216,16 +216,40 @@ public class Factures {
 
 	public void enregisterFichier( String tx ) {
 
-		
+		// Instance de Date
+		Date now = new Date();
+
+		// Formatter la date
+		SimpleDateFormat dateFormatter = new SimpleDateFormat( "y-M-d'-'h-m-s" );
+		PrintWriter pw = null;
+
+		try {
+
+			pw = new PrintWriter( new FileWriter( "Facture-du-" + dateFormatter.format( now ) + ".txt" ) );
+
+			pw.write( texte.getText() );
+
+		} catch ( IOException exc ) {
+
+			JOptionPane.showMessageDialog( null, exc.getMessage()/*
+																	 * texte,
+																	 * "Probl\u00E8me d'enregistrement du fichier"
+																	 */ );
+
+		} finally {// pour garantir la fermeture qu'une exception ait
+					// été déclenchée ou non
+
+			if ( pw != null )
+
+				pw.close();
+
+		}
 
 	}
-	
-	public static boolean FactureZero( double total ) {
 
-		
+	public static boolean FactureZero( double total ) {
 
 		return false;
 	}
 
-	
 }
