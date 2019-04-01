@@ -1,6 +1,5 @@
 package main;
 
-
 public class CV {
 
 	String nom = "", prenom = "", formation = "", competences = "", attentes = "";
@@ -25,12 +24,13 @@ public class CV {
 		this.competences = competences;
 		this.attentes = attentes;
 		this.nbanne = nbanne;
-		
+
 	}
+
 	public static void affiche( CV personne ) {
-		System.out.println( "\nPersonne : \n" + "\nNom : " + personne.nom + "\nPr\u00e9nom : " + personne.prenom + "\nFormation : "
-				+ personne.formation + "\nComp\u00e9tences : " + personne.competences + "\nAttentes : " + personne.attentes
-				+ "\nNombre d'ann\u00e9es : " + personne.nbanne + " ans." );
+		System.out.println( "\nPersonne : \n" + "\nNom : " + personne.nom + "\nPr\u00e9nom : " + personne.prenom
+				+ "\nFormation : " + personne.formation + "\nComp\u00e9tences : " + personne.competences
+				+ "\nAttentes : " + personne.attentes + "\nNombre d'ann\u00e9es : " + personne.nbanne + " ans." );
 	}
 
 }
