@@ -208,7 +208,10 @@ public class Factures {
 			// signifie un problème dans la vérification des erreurs ou dans la
 			// recherche
 			// des commandes dans printFacture()
+			if ( !FactureZero( total ) ) {
 
+				enregisterFichier( nom + " " + total + "$" );
+			}
 			System.out.println( nom + " " + total + "$" );
 		}
 
@@ -216,6 +219,7 @@ public class Factures {
 
 	public void enregisterFichier( String tx ) {
 
+		texte.setText( tx );
 		// Instance de Date
 		Date now = new Date();
 
@@ -248,8 +252,19 @@ public class Factures {
 	}
 
 	public static boolean FactureZero( double total ) {
+		boolean temp;
 
-		return false;
+		if ( total == 0 ) {
+
+			temp = true;
+
+		} else {
+
+			temp = false;
+
+		}
+
+		return temp;
 	}
 
 }
