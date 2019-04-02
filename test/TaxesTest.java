@@ -1,47 +1,51 @@
 package test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import main.Factures;
 
-class TaxesTest {
+public class TaxesTest {
 
 	Factures facturesTest;
 	
 	@Before
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		facturesTest = new Factures();
 	}
 
 	@Test
-	void taxesTest() {
+	public void taxesTest() {
 		
-		//Taxes valides
-		facturesTest.lignes = Arrays.asList("Clients :", "Roger", "Plats :", "Poutine 10.5", "Commandes :",
-				"Roger Poutine 1", "Fin");
-		facturesTest.lireFic();
-		facturesTest.verifierErreurs();
-		facturesTest.printFacture();
-		//assertEquals
-		resetDonnees();
+		//On vérifie si le total est bien taxé
+		Double a = 20.0;
+		Double b = 23.0;
+		assertEquals(b,facturesTest.facturerTaxes(a)[0]);
 		
-	}
-	
-	@Ignore
-	void resetDonnees() {
-		facturesTest.lignes = new ArrayList<String>();
-		facturesTest.clients = new ArrayList<String>();
-		facturesTest.commandes = new ArrayList<String>();
-		facturesTest.plats = new ArrayList<String>();
-		facturesTest.erreur = null;
+		a = 55.0;
+		b = 63.25;
+		assertEquals(b,facturesTest.facturerTaxes(a)[0]);
+		
+		//On vérifie si la TPS est correcte
+		a = 30.0;
+		b = 1.5;
+		assertEquals(b,facturesTest.facturerTaxes(a)[1]);
+		
+		a = 44.8;
+		b = 2.24;
+		assertEquals(b,facturesTest.facturerTaxes(a)[1]);
+		
+		//On vérifie si la TVQ est correcte
+		a = 2.44;
+		b = 0.24;
+		assertEquals(b,facturesTest.facturerTaxes(a)[2]);
+		
+		a = 16.19;
+		b = 1.62;
+		assertEquals(b,facturesTest.facturerTaxes(a)[2]);
+		
 	}
 
 }

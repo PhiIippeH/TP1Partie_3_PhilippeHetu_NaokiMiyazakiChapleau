@@ -7,21 +7,21 @@ import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import main.Factures;
 
-class CommandesErreursTest {
+public class CommandesErreursTest {
 
 	Factures facturesTest;
 
 	@Before
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 		facturesTest = new Factures();
 	}
 
 	@Test
-	void nomsExistentTest() {
+	public void nomsExistentTest() {
 
 		// Le client dans les commandes n'existe pas
 		facturesTest.lignes = Arrays.asList("Clients :", "Roger", "Plats :", "Poutine 10.5", "Commandes :",
@@ -40,7 +40,7 @@ class CommandesErreursTest {
 	}
 
 	@Test
-	void formatValideTest() {
+	public void formatValideTest() {
 		// Données valides
 		facturesTest.lignes = Arrays.asList("Clients :", "Roger", "Plats :", "Poutine 10.5", "Commandes :",
 				"Roger Poutine 1", "Fin");
@@ -92,7 +92,7 @@ class CommandesErreursTest {
 	}
 
 	@Test
-	void chiffresErrones() {
+	public void chiffresErrones() {
 		// Plats prix negatif
 		facturesTest.lignes = Arrays.asList("Clients :", "Roger", "Plats :", "Poutine -10.5", "Commandes :",
 				"Roger Poutine 1", "Fin");
@@ -113,7 +113,7 @@ class CommandesErreursTest {
 	}
 
 	@Ignore
-	void resetDonnees() {
+	public void resetDonnees() {
 		facturesTest.lignes = new ArrayList<String>();
 		facturesTest.clients = new ArrayList<String>();
 		facturesTest.commandes = new ArrayList<String>();

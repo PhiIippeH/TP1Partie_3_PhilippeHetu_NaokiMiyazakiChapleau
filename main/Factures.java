@@ -262,14 +262,9 @@ public class Factures {
 		enregisterFichier( temp );
 	}
 
-<<<<<<< HEAD
 	public Double[] facturerTaxes(Double prix) {
 		
 		return new Double[] {Math.round(prix*1.15*100.0) / 100.0, Math.round(prix*0.05*100.0)/100.0, Math.round(prix*0.1*100.0)/100.0};
-=======
-	public Double[] facturerTaxes( Double prix ) {
-		return new Double[] { prix * 1.15, prix * 0.05, prix * 0.1 };
->>>>>>> 67a4ab20dfa477985ed5f28e3044014168b2a552
 	}
 
 	public void enregisterFichier( String tx ) {
