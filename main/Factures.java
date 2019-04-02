@@ -254,7 +254,8 @@ public class Factures {
 	}
 
 	public Double[] facturerTaxes(Double prix) {
-		return new Double[] {prix*1.15,prix*0.05,prix*0.1};
+		
+		return new Double[] {Math.round(prix*1.15*100.0) / 100.0, Math.round(prix*0.05*100.0)/100.0, Math.round(prix*0.1*100.0)/100.0};
 	}
 
 	public void enregisterFichier(String tx) {
