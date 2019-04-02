@@ -28,6 +28,7 @@ class TaxesTest {
 		facturesTest.lignes = Arrays.asList("Clients :", "Roger", "Plats :", "Poutine 10.5", "Commandes :",
 				"Roger Poutine 1", "Fin");
 		facturesTest.lireFic();
+		facturesTest.verifierErreurs();
 		facturesTest.printFacture();
 		//assertEquals
 		resetDonnees();

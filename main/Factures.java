@@ -233,6 +233,7 @@ public class Factures {
 						if (platSplit[0].equals(comSplit[1])) {
 
 							// On rajoute au total l'équation qui est <quantité> * <prix> du plat
+
 							total += Double.parseDouble(comSplit[2]) * Double.parseDouble(platSplit[1]);
 						}
 					}
@@ -243,12 +244,17 @@ public class Factures {
 			// signifie un problème dans la vérification des erreurs ou dans la recherche
 			// des commandes dans printFacture()
 			if (!FactureZero(total)) {
-
-				enregisterFichier(nom + " " + total + "$");
+				Double[] totalAvecTaxes = facturerTaxes(total);
+				enregisterFichier(nom + " " + totalAvecTaxes[0] + "$\tTPS: " + totalAvecTaxes[1] + "$\tTVQ: " + totalAvecTaxes[2] + "$\n");
+				System.out.println(nom + " " + totalAvecTaxes[0] + "$\tTPS: " + totalAvecTaxes[1] + "$\tTVQ: " + totalAvecTaxes[2] + "$\n");
 			}
-			System.out.println(nom + " " + total + "$");
+			
 		}
 
+	}
+
+	public Double[] facturerTaxes(Double prix) {
+		return new Double[] {prix*1.15,prix*0.05,prix*0.1};
 	}
 
 	public void enregisterFichier(String tx) {
