@@ -1,6 +1,13 @@
 package main;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.*;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  * Permet de créer une facture basé sur un fichier texte préformatté.
@@ -14,6 +21,7 @@ public class Factures {
 	public List<String> commandes = new ArrayList<String>();
 	public List<String> lignes = new ArrayList<String>();
 	public String erreur = null;
+	public JTextArea texte = new JTextArea();
 
 	public Factures() {
 
@@ -24,9 +32,9 @@ public class Factures {
 		FicLecture fic = new FicLecture();
 		lignes = fic.fileChoose();
 		lireFic();
-		if (erreur != null)
+		if (erreur == null)
 			verifierErreurs();
-		if (erreur != null)
+		if (erreur == null)
 			printFacture();
 		if (erreur != null)
 			System.out.println("Une erreur est survenue: " + erreur);
@@ -96,7 +104,8 @@ public class Factures {
 
 			} else if (a.indexOf("Fin") == -1) {
 
-				// Si on n'est pas à la dernière ligne (qui s'intitule "Fin"), ajouter la ligne
+				// Si on n'est pas à la dernière ligne (qui s'intitule "Fin"),
+				// ajouter la ligne
 				// au type respectif
 				if (typeChose == 0) {
 
@@ -109,35 +118,36 @@ public class Factures {
 					if (platSplit.length != 2) {
 
 						return erreur = "Format non respecté: la ligne " + compteur + " ne correspond pas à un plat.";
-						
+
 					} else if (!platSplit[1].matches("^\\d+(\\.\\d+)?$")) {
-						
+
 						return erreur = "Données erronées: le prix du plat " + platSplit[0] + " est invalide.";
-					
+
 					} else {
-						
+
 						plats.add(a);
-						
+
 					}
-					
+
 				} else if (typeChose == 2) {
-					
+
 					String[] comSplit = a.split(" ");
 
 					if (comSplit.length != 3) {
-						
-						return erreur =  "Format non respecté: la ligne " + compteur + " ne correspond pas à une commande.";
-					
+
+						return erreur = "Format non respecté: la ligne " + compteur
+								+ " ne correspond pas à une commande.";
+
 					} else if (!comSplit[2].matches("\\d+")) {
-						
+
 						return erreur = "Données erronées: " + comSplit[2] + " n'est pas une quantité valide.";
-						
+
 					} else {
-						
+
 						commandes.add(a);
-						
+
 					}
-					
+
 				}
 			}
 
@@ -156,18 +166,21 @@ public class Factures {
 
 		// Vérification des erreurs dans la liste de commandes
 		for (int i = 0; i < commandes.size(); i++) {
-
-			// Commandes est formatté comme suit: <Client> <Plat> <Quantite>
+			// Commandes est formatté comme suit: <Client> <Plat>
 			String[] comSplit = commandes.get(i).split(" ");
 			boolean platFound = false;
 
-			// Si la première donnée de commande est un client qui existe dans Clients
-			if (clients.contains(comSplit[0])) {
+			// Si il y a 3 données dans la ligne de commande et que la première
+			// est un
+			// client qui existe dans Clients
+			if (comSplit.length == 3 && clients.contains(comSplit[0])) {
 				for (int j = 0; j < plats.size(); j++) {
 
-					// Si il y a un plat qui correspond à la deuxième donnée de la commande,
+					// Si il y a un plat qui correspond à la deuxième donnée de
+					// la commande,
 					// c'est-à-dire le plat.
-					// plats est composé de deux données, soit le nom du plat et le prix. On cherche
+					// plats est composé de deux données, soit le nom du plat et
+					// le prix. On cherche
 					// seulement le nom, donc split(" ")[0].
 					if (plats.get(j).split(" ")[0].equals(comSplit[1]))
 						platFound = true;
@@ -198,7 +211,6 @@ public class Factures {
 
 			// Le nom du client
 			String nom = clients.get(i);
-
 			// Total de la facture
 			double total = 0;
 
@@ -230,7 +242,62 @@ public class Factures {
 			// Il n'y a pas de moyen d'échouer cette étape. L'échouement de cette étape
 			// signifie un problème dans la vérification des erreurs ou dans la recherche
 			// des commandes dans printFacture()
+			if (!FactureZero(total)) {
+
+				enregisterFichier(nom + " " + total + "$");
+			}
 			System.out.println(nom + " " + total + "$");
 		}
+
 	}
+
+	public void enregisterFichier(String tx) {
+
+		texte.setText(tx);
+		// Instance de Date
+		Date now = new Date();
+
+		// Formatter la date
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("y-M-d'-'h-m-s");
+		PrintWriter pw = null;
+
+		try {
+
+			pw = new PrintWriter(new FileWriter("Facture-du-" + dateFormatter.format(now) + ".txt"));
+
+			pw.write(texte.getText());
+
+		} catch (IOException exc) {
+
+			JOptionPane.showMessageDialog(null, exc.getMessage()/*
+																 * texte, "Probl\u00E8me d'enregistrement du fichier"
+																 */ );
+
+		} finally {// pour garantir la fermeture qu'une exception ait
+					// été déclenchée ou non
+
+			if (pw != null)
+
+				pw.close();
+
+		}
+
+	}
+
+	public static boolean FactureZero(double total) {
+		boolean temp;
+
+		if (total == 0) {
+
+			temp = true;
+
+		} else {
+
+			temp = false;
+
+		}
+
+		return temp;
+	}
+
 }

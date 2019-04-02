@@ -9,7 +9,7 @@ public class launcher {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Factures();
+		new Factures(true);
 		System.exit(0);
 	}
 
