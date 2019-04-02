@@ -82,7 +82,30 @@ public class FacturesTest {
 	
 	@Test
 	public void verifierErreursTest() {
+		
+		//Données valides
+		facturesTest.lignes = Arrays.asList("Clients :","Roger","Plats :","Poutine 10.5","Commandes :","Roger Poutine 1","Fin");
+		facturesTest.lireFic();
 		assertNull(facturesTest.verifierErreurs());
+		resetDonnees();
+		
+		//Plats prix negatif
+		facturesTest.lignes = Arrays.asList("Clients :","Roger","Plats :","Poutine -10.5","Commandes :","Roger Poutine 1","Fin");
+		facturesTest.lireFic();
+		assertNotNull(facturesTest.verifierErreurs());
+		resetDonnees();
+		
+		//Commandes quantite negative
+		facturesTest.lignes = Arrays.asList("Clients :","Roger","Plats :","Poutine 10.5","Commandes :","Roger Poutine -1","Fin");
+		assertNotNull(facturesTest.lireFic());
+		resetDonnees();
+		
+		//Commandes quantite negative
+		facturesTest.lignes = Arrays.asList("Clients :","Roger","Plats :","Poutine 10.5","Commandes :","Roger Poutine -1","Fin");
+		facturesTest.lireFic();
+		assertNotNull(facturesTest.verifierErreurs());
+		resetDonnees();
+		
 	}
 	
 	@Ignore
