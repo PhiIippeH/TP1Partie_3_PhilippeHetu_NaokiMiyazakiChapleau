@@ -163,7 +163,7 @@ public class Factures {
 	 */
 
 	public String verifierErreurs() {
-
+		
 		// Vérification des erreurs dans la liste de commandes
 		for (int i = 0; i < commandes.size(); i++) {
 			// Commandes est formatté comme suit: <Client> <Plat>
@@ -202,7 +202,7 @@ public class Factures {
 	 * Imprime la facture à l'écran.
 	 */
 	public void printFacture() {
-
+		String temp = "Bienvenue chez Barette!" + "\nFactures :\n";
 		// Print la facture
 		System.out.println("Bienvenue chez Barette!" + "\nFactures :");
 
@@ -243,12 +243,12 @@ public class Factures {
 			// signifie un problème dans la vérification des erreurs ou dans la recherche
 			// des commandes dans printFacture()
 			if (!FactureZero(total)) {
-
-				enregisterFichier(nom + " " + total + "$");
+				temp += nom + " " + total + "$" + "\n";
+				System.out.println(nom + " " + total + "$");
 			}
-			System.out.println(nom + " " + total + "$");
+			
 		}
-
+		enregisterFichier(temp);
 	}
 
 	public void enregisterFichier(String tx) {
